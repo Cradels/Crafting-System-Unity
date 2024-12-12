@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Crafting.Recipe;
+using UnityEngine;
 
 namespace Crafting
 {
@@ -8,11 +10,7 @@ namespace Crafting
     {
         private List<Recipe<T>> _recipes;
 
-        public List<Recipe<T>> Recipes
-        {
-            get => _recipes;
-            private set => _recipes = value;
-        }
+        public List<Recipe<T>> Recipes => _recipes;
 
         public void AddRecipe(Recipe<T> recipe)
         {
@@ -20,42 +18,89 @@ namespace Crafting
 
             _recipes.Add(recipe);
         }
-
-        // All recipes that have all constraints fullfilled
+        
+        public void RemoveRecipe(Recipe<T> recipe)
+        {
+            _recipes?.Remove(recipe);
+        }
+        
+        /// <summary>
+        /// Returns all recipes that fulfill all constraints
+        /// </summary>
         public List<Recipe<T>> GetRecipes()
         {
-            return _recipes.Where(r => r.Constraints.All(c => c.IsFullfilled())).ToList();
+            return _recipes.Where(recipe => recipe.Constraints.All(c => c.IsFullfilled())).ToList();
         }
 
-        // All recipes that can be crafted with List<T, int> -> T: Item, int: Amount
-        public List<Recipe<T>> GetRecipes(List<(T, int)> items)
+        /// <summary>
+        /// Returns all recipes that can be crafted with the given items and where all constraints are fullfilled
+        /// </summary>
+        /// <param name="items">List of Item and it's amount</param>
+        /// <param name="ignoreConstraints">If true, constraints are ignored</param>
+        /// <returns></returns>
+        public List<Recipe<T>> GetRecipes(List<InputStack<T>> items, bool ignoreConstraints = false, bool musteBeInCorretOrder = false)
         {
             List<Recipe<T>> craftAbleRecipes = new();
-            foreach (Recipe<T> r in _recipes)
+            foreach (Recipe<T> recipe in _recipes)
             {
-                // continue if any constraint is not fullfilled
-                if(r.Constraints.Any(c => !c.IsFullfilled()))
+                // continue if any constraint is not fullfilled and constraints should not be ignored
+                if(ignoreConstraints && recipe.Constraints.Any(c => !c.IsFullfilled()))
                     continue;
                 
-                bool canAddRecipe = true;
-                foreach (InputStack<T> stack in r.InputStacks)
+                if (musteBeInCorretOrder? AllItemsAvailablleInCorrectOrder(items, recipe) : AllItemsAvailable(items, recipe))
                 {
-                    List<(T, int)> allRelevantItemsFromInventory =
-                        items.Where(i => i.Item1.Equals(stack.Item)).ToList();
-
-                    if (allRelevantItemsFromInventory.Any(i => i.Item2 < stack.Amount))
-                    {
-                        canAddRecipe = false;
-                    }
-                }
-
-                if (canAddRecipe)
-                {
-                    craftAbleRecipes.Add(r);
+                    craftAbleRecipes.Add(recipe);
                 }
             }
 
             return craftAbleRecipes;
+        }
+
+        private bool AllItemsAvailable(List<InputStack<T>> items, Recipe<T> recipe)
+        {
+            foreach (InputStack<T> stack in recipe.RequiredItems)
+            {
+                List<InputStack<T>> allRelevantItemsFromInventory =
+                    items.Where(i => i.Item.Equals(stack.Item)).ToList();
+
+                if (allRelevantItemsFromInventory.Count == 0)
+                {
+                    return false;
+                }
+
+                if (allRelevantItemsFromInventory.Any(i => i.Amount < stack.Amount))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        private bool AllItemsAvailablleInCorrectOrder(List<InputStack<T>> items, Recipe<T> recipe)
+        {
+            List<InputStack<T>> recipeItems = recipe.RequiredItems;
+            if(items.Count != recipeItems.Count)
+            {
+                Debug.LogError("'Inventory Items' musst be the same size as 'Recipe Items'");
+                return false;
+            }
+            
+            for(int i = 0; i < items.Count; i++)
+            {
+                // If the items are not the same or the amount is not enough
+                if(!items[i].Item.Equals(recipeItems[i].Item) || items[i].Amount < recipeItems[i].Amount)
+                {
+                    return false;
+                }
+                
+                if (items[i].Amount < recipeItems[i].Amount)
+                {
+                    //return false;    
+                }
+            }
+
+            return true;
         }
     }
 }
