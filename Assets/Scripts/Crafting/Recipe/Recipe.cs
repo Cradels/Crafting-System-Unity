@@ -1,17 +1,18 @@
 using System.Collections.Generic;
+using JetBrains.Annotations;
 
 namespace Crafting.Recipe
 {
     public class Recipe<T>
     {
-        public List<InputStack<T>> InputStacks;
-        public List<OutputStack<T>> OutputStacks;
+        public readonly List<InputStack<T>> RequiredItems;
+        public readonly List<OutputStack<T>> OutputStacks;
 
         public List<Constraint> Constraints;
         
-        public Recipe(List<InputStack<T>> inputStacks, List<OutputStack<T>> outputStacks, List<Constraint> constraints)
+        public Recipe(List<InputStack<T>> requiredItems, List<OutputStack<T>> outputStacks, List<Constraint> constraints)
         {
-            InputStacks = inputStacks;
+            RequiredItems = requiredItems;
             OutputStacks = outputStacks;
             Constraints = constraints;
         }
