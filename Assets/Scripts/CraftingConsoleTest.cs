@@ -8,24 +8,24 @@ using Sirenix.OdinInspector;
 
 public class CraftingConsoleTest : MonoBehaviour
 {
-    private CraftingSystem<string> _craftingSystem;
+    private CraftingSystem<BaseItem> _craftingSystem;
 
-    public CraftingSystem<string> CraftingSystem
+    public CraftingSystem<BaseItem> CraftingSystem
     {
-        get { return _craftingSystem ??= new CraftingSystem<string>(); }
+        get { return _craftingSystem ??= new CraftingSystem<BaseItem>(); }
     }
 
 
     [Button]
-    public void AddRecipe(List<InputStack<string>> inputItems, List<OutputStack<string>> outputItems)
+    public void AddRecipe(List<InputStack<BaseItem>> inputItems, List<OutputStack<BaseItem>> outputItems)
     {
-        InputStack<string>[] input = new InputStack<string>[inputItems.Count];
+        InputStack<BaseItem>[] input = new InputStack<BaseItem>[inputItems.Count];
         inputItems.CopyTo(input);
         
-        OutputStack<string>[] output = new OutputStack<string>[outputItems.Count];
+        OutputStack<BaseItem>[] output = new OutputStack<BaseItem>[outputItems.Count];
         outputItems.CopyTo(output);
         
-        Recipe<string> recipe = new Recipe<string>(
+        Recipe<BaseItem> recipe = new Recipe<BaseItem>(
             input.ToList(),
             output.ToList(),
             new List<Constraint>()
@@ -40,24 +40,24 @@ public class CraftingConsoleTest : MonoBehaviour
     public void GetAllRecipes()
     {
         Debug.Log("All Recipes: ");
-        foreach (Recipe<string> recipe in CraftingSystem.Recipes)
+        foreach (Recipe<BaseItem> recipe in CraftingSystem.Recipes)
         {
             PrintRecipe(recipe);
         }
         Debug.Log("====================================");
     }
 
-    private void PrintRecipe(Recipe<string> recipe)
+    private void PrintRecipe(Recipe<BaseItem> recipe)
     {
         string log = "<== Recipe ==> \n";
         log += "Click to See Recipe Details \n";
         log+="InputItems: \n";
-        foreach (InputStack<string> inputItem in recipe.RequiredItems)
+        foreach (InputStack<BaseItem> inputItem in recipe.RequiredItems)
         {
             log+= $"Item {inputItem.Item.ToString()}, Amount: {inputItem.Amount} \n";
         }
         log += "\n OutputItems: \n";
-        foreach (OutputStack<string> outputItem in recipe.OutputStacks)
+        foreach (OutputStack<BaseItem> outputItem in recipe.OutputStacks)
         {
             log+= $"Item {outputItem.Item.ToString()}, Amount: {outputItem.Amount}, Skikllvalue: {outputItem.SkillValue} \n";
         }
@@ -65,10 +65,10 @@ public class CraftingConsoleTest : MonoBehaviour
     }
 
     [Button]
-    public void GetAllRecipes(List<InputStack<string>> inventory)
+    public void GetAllRecipes(List<InputStack<BaseItem>> inventory)
     {
-        List<Recipe<string>> recepies =  _craftingSystem.GetRecipes(inventory, true, true);
-        foreach (Recipe<string> recipe in recepies)
+        List<Recipe<BaseItem>> recepies =  _craftingSystem.GetRecipes(inventory, true, true);
+        foreach (Recipe<BaseItem> recipe in recepies)
         {
             PrintRecipe(recipe);
         }
