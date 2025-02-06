@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Crafting.Recipe;
+using Crafting;
 using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
@@ -11,34 +13,45 @@ public class InventoryManager : MonoBehaviour
     public GameObject ItemPrefab;
     public GameObject RecipePrefab;
 
-    // A list to store references to the created inventory slots
-    private List<InventorySlot> inventorySlots = new List<InventorySlot>();
 
-    private void Start()
-    {
+    private CraftingSystem<BaseItem> craftSys = new CraftingSystem<BaseItem>();
+    private List<InputStack<BaseItem>> inventory = new List<InputStack<BaseItem>>();
+
+    private void Start(){
         PopulateInventory();
         PopulateRecepies();
     }
 
-    public void PopulateInventory()
+    public void PopulateInventory(){
+    foreach (BaseItem item in possibleItems)
     {
-        foreach (BaseItem item in possibleItems)
+        GameObject newSlot = Instantiate(ItemPrefab, inventoryUIParent);
+        InventorySlot slot = newSlot.GetComponent<InventorySlot>();
+        int amount = Random.Range(1, 31);
+        slot.SetItem(item, amount);
+        
+        InputStack<BaseItem> stack = new InputStack<BaseItem>
         {
-            GameObject newSlot = Instantiate(ItemPrefab, inventoryUIParent);
-            InventorySlot slot = newSlot.GetComponent<InventorySlot>();
-            slot.SetItem(item);
-            inventorySlots.Add(slot);
-        }
+            Item = item,
+            Amount = amount
+        };
+        inventory.Add(stack);
     }
+}
 
-    public void PopulateRecepies()
-    {
+
+    public void PopulateRecepies(){
         foreach (BaseRecipe r in possibleRecepies)
         {
             GameObject newSlot = Instantiate(RecipePrefab, recipeUIParent);
             RecipeSlot slot = newSlot.GetComponent<RecipeSlot>();
             slot.SetItem(r);
+            //craftSys.AddRecipe(r);
         }
     }    
     
+
+    private void Filter(){
+        
+    }
 }

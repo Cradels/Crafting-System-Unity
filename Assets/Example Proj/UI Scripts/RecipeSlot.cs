@@ -20,11 +20,23 @@ public class RecipeSlot : MonoBehaviour
             ClearRecipeSlot();
         }
     }
-
     public void ClearRecipeSlot()
     {
         icon.sprite = null;
         icon.enabled = false;
         itemName.text = "";
+    }
+
+    public void Disable()
+    {
+        icon.color = Color.red;
+        itemName.color = Color.red;
+    }
+
+
+    public void Enable()
+    {
+        icon.color = Color.white;
+        itemName.color = Color.white;
     }
 }

@@ -7,14 +7,14 @@ public class InventorySlot : MonoBehaviour
     public Image icon;
     public TextMeshProUGUI itemName;
 
-    public void SetItem(BaseItem item)
+    public void SetItem(BaseItem item, int amount)
     {
         if (item != null)
         {
             Debug.Log("Setting item: " + item.ItemName);
             icon.sprite = item.ItemImage;
             icon.enabled = true;
-            itemName.text = Random.Range(1, 31).ToString();
+            itemName.text = amount.ToString();
         }
         else
         {
