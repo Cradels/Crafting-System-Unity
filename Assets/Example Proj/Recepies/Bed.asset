@@ -14,6 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RecipeName: Bed
   RecipeImage: {fileID: 8529119218393442601, guid: 888b05bbbe3081446809a024f429a012, type: 3}
+  inputs:
+  - Item: {fileID: 11400000, guid: 5337bf0d8fc69a14d9e62633aa383ec8, type: 2}
+    Amount: 4
+  - Item: {fileID: 11400000, guid: e6f8250585787244aa51f6c73e795c03, type: 2}
+    Amount: 4
+  - Item: {fileID: 11400000, guid: ad9a8abfe7fabff41b152126b2af7322, type: 2}
+    Amount: 2
+  - Item: {fileID: 11400000, guid: 97db0a6e965bd3b49a843df4f78d0f76, type: 2}
+    Amount: 2
+  outputs:
+  - Item: {fileID: 11400000, guid: 23e4eaab097b33c478601dcb85fcc026, type: 2}
+    Amount: 0
+    SkillValue: 7
   _inputItem1: {fileID: 11400000, guid: 5337bf0d8fc69a14d9e62633aa383ec8, type: 2}
   _inputAmount1: 4
   _inputItem2: {fileID: 11400000, guid: e6f8250585787244aa51f6c73e795c03, type: 2}
