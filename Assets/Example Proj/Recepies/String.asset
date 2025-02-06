@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cf484eb40fa7c74ab6af20366f4b93f, type: 3}
+  m_Name: String
+  m_EditorClassIdentifier: 
+  RecipeName: String
+  RecipeImage: {fileID: -3281207096596396906, guid: 3583117a6e942b84dba1b4a7c406cac2, type: 3}
+  _inputItem1: {fileID: 11400000, guid: 5337bf0d8fc69a14d9e62633aa383ec8, type: 2}
+  _inputAmount1: 4
+  _inputItem2: {fileID: 11400000, guid: 591347e7968ce6f4d892f3f29a867fa3, type: 2}
+  _inputAmount2: 1
+  _inputItem3: {fileID: 0}
+  _inputAmount3: 0
+  _inputItem4: {fileID: 0}
+  _inputAmount4: 0
+  _inputItem5: {fileID: 0}
+  _inputAmount5: 0
+  _outputItem1: {fileID: 11400000, guid: 97db0a6e965bd3b49a843df4f78d0f76, type: 2}
+  _outputAmount1: 1
+  _skillValue1: 3
+  _outputItem2: {fileID: 0}
+  _outputAmount2: 0
+  _skillValue2: 0
