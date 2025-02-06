@@ -46,7 +46,7 @@ public class InventoryManager : MonoBehaviour
             GameObject newSlot = Instantiate(RecipePrefab, recipeUIParent);
             RecipeSlot slot = newSlot.GetComponent<RecipeSlot>();
             slot.SetItem(r);
-            craftSys.AddRecipe(r.inputs, r.outputs);
+            craftSys.AddRecipe(new Recipe<BaseItem>(r.inputs, r.outputs, r.constraints));
         }
     }    
     
