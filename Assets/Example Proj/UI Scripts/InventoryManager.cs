@@ -73,7 +73,7 @@ public class InventoryManager : MonoBehaviour
             GameObject newSlot = Instantiate(RecipePrefab, recipeUIParent);
             RecipeSlot slot = newSlot.GetComponent<RecipeSlot>();
 
-            // Look up the BaseRecipe for display purposes.
+            
             if (recipeMapping.TryGetValue(recipe, out BaseRecipe baseRecipe))
             {
                 slot.SetItem(baseRecipe);
@@ -83,30 +83,26 @@ public class InventoryManager : MonoBehaviour
                 Debug.LogWarning("No BaseRecipe mapping found for recipe!");
             }
 
-            // Use craftSys.GetRecipes() to check craftability.
+            
             if (craftableRecipes.Contains(recipe))
             {
-                slot.Enable();  // The recipe is craftable.
+                slot.Enable();
             }
             else
             {
-                slot.Disable(); // The recipe is not craftable.
+                slot.Disable();
             }
         }
 
     }
     public void DeleteRandomInventoryItems(int numberOfItems)
     {
-        // Remove as many items as requested, or stop if the inventory is empty.
         for (int i = 0; i < numberOfItems && inventory.Count > 0; i++)
         {
-            // Pick a random index based on the current inventory count.
             int randomIndex = Random.Range(0, inventory.Count);
-
-            // Remove the inventory data.
+            
             inventory.RemoveAt(randomIndex);
-
-            // Remove the corresponding UI element.
+            
             if (inventoryUIParent.childCount > randomIndex)
             {
                 Transform child = inventoryUIParent.GetChild(randomIndex);

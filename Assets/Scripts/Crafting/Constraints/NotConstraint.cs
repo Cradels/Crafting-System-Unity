@@ -1,9 +1,10 @@
 using Crafting.Recipe;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "NotConstraint", menuName = "Scriptable Objects/Constraints/NotConstraint")]
 public class NotConstraint : Constraint
 {
-    private readonly Constraint _constraint;
+    public Constraint _constraint;
 
     public NotConstraint(Constraint constraint)
     {

@@ -1,8 +1,8 @@
 using System;
 using Crafting.Recipe;
-using Unity.VisualScripting;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "GreaterConstriant", menuName = "Scriptable Objects/Constraints/GreaterConstriant")]
 public class GreaterConstriant : Constraint
 {
     public Func<float> inputValue;

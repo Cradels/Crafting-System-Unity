@@ -2,6 +2,7 @@ using System;
 using Crafting.Recipe;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "GreaterEqualsConstraint", menuName = "Scriptable Objects/Constraints/GreaterEqualsConstraint")]
 public class GreaterEqualsConstraint : Constraint
 {
     public Func<float> inputValue;

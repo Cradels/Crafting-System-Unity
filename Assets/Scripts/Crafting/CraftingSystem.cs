@@ -44,7 +44,7 @@ namespace Crafting
             foreach (Recipe<T> recipe in _recipes)
             {
                 // continue if any constraint is not fullfilled and constraints should not be ignored
-                if(ignoreConstraints && recipe.Constraints.Any(c => !c.IsFullfilled()))
+                if(!ignoreConstraints && recipe.Constraints.Any(c => !c.IsFullfilled()))
                     continue;
                 
                 if (musteBeInCorretOrder? AllItemsAvailablleInCorrectOrder(items, recipe) : AllItemsAvailable(items, recipe))

@@ -1,7 +1,12 @@
+using UnityEngine;
+
 namespace Crafting.Recipe
 {
-    public abstract class Constraint
+    public class Constraint : ScriptableObject
     {
-        public abstract bool IsFullfilled();
+        public virtual bool IsFullfilled()
+        {
+            return true;
+        }
     }
 }

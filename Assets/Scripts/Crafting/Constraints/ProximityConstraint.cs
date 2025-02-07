@@ -2,6 +2,7 @@ using System;
 using Crafting.Recipe;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "ProximityConstraint", menuName = "Scriptable Objects/Constraints/ProximityConstraint")]
 public class ProximityConstraint : Constraint
 {
     public Func<Vector3> getPlayerPosition;

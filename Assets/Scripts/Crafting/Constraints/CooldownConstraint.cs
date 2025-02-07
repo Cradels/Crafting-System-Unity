@@ -1,10 +1,11 @@
 using Crafting.Recipe;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "Constraint", menuName = "Scriptable Objects/Constraints/CooldownConstraint")]
 public class CooldownConstraint : Constraint
 {
-    private readonly float cooldownTime;
-    private float lastActionTime;
+    public float cooldownTime;
+    public float lastActionTime;
 
     public CooldownConstraint(float cooldownTime)
     {

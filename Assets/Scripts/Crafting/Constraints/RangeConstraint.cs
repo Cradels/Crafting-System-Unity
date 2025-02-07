@@ -2,6 +2,7 @@ using System;
 using Crafting.Recipe;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "RangeConstraint", menuName = "Scriptable Objects/Constraints/RangeConstraint")]
 public class RangeConstraint : Constraint
 {
     public Func<float> inputValue;
