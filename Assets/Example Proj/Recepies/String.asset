@@ -21,3 +21,5 @@ MonoBehaviour:
   - Item: {fileID: 11400000, guid: 97db0a6e965bd3b49a843df4f78d0f76, type: 2}
     Amount: 4
     SkillValue: 3
+  constraints:
+  - {fileID: 11400000, guid: 4eb774b878b8db543917bf04ec66824f, type: 2}

@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 409b81b7ca69e7f4ab5910c3e5f95a77, type: 3}
   m_Name: SkillLevelConstraint
   m_EditorClassIdentifier: 
-  requiredLevel: 0
+  requiredLevel: 10

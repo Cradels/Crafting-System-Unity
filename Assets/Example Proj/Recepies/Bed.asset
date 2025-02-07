@@ -28,4 +28,4 @@ MonoBehaviour:
     Amount: 0
     SkillValue: 7
   constraints:
-  - {fileID: 11400000, guid: 4098985214dcd934988faa729634ff83, type: 2}
+  - {fileID: 11400000, guid: 4eb774b878b8db543917bf04ec66824f, type: 2}
