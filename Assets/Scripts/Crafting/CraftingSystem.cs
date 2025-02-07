@@ -56,6 +56,25 @@ namespace Crafting
             return craftAbleRecipes;
         }
 
+
+        // was broken, i fixed. Old method is in comments below if needed for reference
+        private bool AllItemsAvailable(List<InputStack<T>> items, Recipe<T> recipe)
+        {
+            foreach (InputStack<T> stack in recipe.RequiredItems)
+            {
+                int totalAvailable = items
+                    .Where(i => i.Item.Equals(stack.Item))
+                    .Sum(i => i.Amount);
+
+                if (totalAvailable < stack.Amount)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        /*
         private bool AllItemsAvailable(List<InputStack<T>> items, Recipe<T> recipe)
         {
             foreach (InputStack<T> stack in recipe.RequiredItems)
@@ -73,9 +92,11 @@ namespace Crafting
                     return false;
                 }
             }
-
             return true;
         }
+
+        */
+
 
         private bool AllItemsAvailablleInCorrectOrder(List<InputStack<T>> items, Recipe<T> recipe)
         {

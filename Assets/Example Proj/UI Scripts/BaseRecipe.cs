@@ -13,5 +13,5 @@ public class BaseRecipe : ScriptableObject
 
     public List<InputStack<BaseItem>> inputs;
     public List<OutputStack<BaseItem>> outputs;
-    public List<Constraint> constraints;
+    public List<Constraint> constraints = new List<Constraint>();
 }
